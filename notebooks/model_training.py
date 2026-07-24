@@ -3,10 +3,10 @@ import numpy as np
 import tensorflow as tf
 import os
 import glob
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 import matplotlib.pyplot as plt
-from keras import datasets, layers, models
-
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense , Input
 
 
 train_dir = 'data/train'
@@ -45,4 +45,24 @@ y_test = np.concatenate([np.ones(len(test_real)), np.zeros(len(test_fake))])
 print(X_train.shape, y_train.shape)
 print(X_test.shape, y_test.shape)
 
-model= models.sequential()
+
+model = Sequential()
+
+model.add(Input(shape=(32, 32, 3)))
+model.add(Conv2D(32, (3, 3), activation='relu')) 
+model.add(MaxPooling2D((2, 2)))                                           
+
+model.add(Conv2D(32, (3, 3), activation='relu'))                         
+model.add(MaxPooling2D((2, 2)))
+
+
+model.add(Flatten())                                                       
+model.add(Dense(64, activation='relu'))                                  
+model.add(Dense(1, activation='sigmoid'))                                
+
+
+model.compile(optimizer='adam', 
+              loss='binary_crossentropy', 
+              metrics=['accuracy'])
+
+model.summary()                            
