@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 import glob
 import matplotlib.pyplot as plt
-from tensorflow.keras.preprocessing import image
+from tensorflow.keras.preprocessing import image, load_model
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Rescaling
 from tensorflow.keras.callbacks import EarlyStopping
@@ -116,3 +116,4 @@ plt.show()
 
 model.save("cifake_cnn.keras")
 print("Model saved to cifake_cnn.keras")
+
